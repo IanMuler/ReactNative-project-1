@@ -1,17 +1,17 @@
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import { Screens } from "../screens/types";
-import FormScreen from "../screens/Form";
-import Home from "../screens/Home";
+// import { createDrawerNavigator } from "@react-navigation/drawer";
+// import { Screens } from "../screens/types";
+// import FormScreen from "../screens/Form";
+// import Pokedex from "../screens/Pokedex";
+// import { RootStackParamList } from "./types";
 
-const Drawer = createDrawerNavigator();
+// const Drawer = createDrawerNavigator<RootStackParamList>();
 
-const NavigationDrawer = () => {
-  return (
-    <Drawer.Navigator initialRouteName="Home">
-      <Drawer.Screen name={Screens.Home} component={Home} />
-      <Drawer.Screen name={Screens.Form} component={FormScreen} />
-    </Drawer.Navigator>
-  );
-};
+// const NavigationDrawer = () => {
+//   return (
+//     <Drawer.Navigator initialRouteName={Screens.Pokedex}>
+//       <Drawer.Screen name={Screens.Pokedex} component={Pokedex} />
+//     </Drawer.Navigator>
+//   );
+// };
 
-export default NavigationDrawer;
+// export default NavigationDrawer;

@@ -1,18 +1,17 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { RootStackParamList } from "./types";
-import { Screens } from "../screens/types";
-import FormScreen from "../screens/Form";
-import Home from "../screens/Home";
+// import { createNativeStackNavigator } from "@react-navigation/native-stack";
+// import { RootStackParamList } from "./types";
+// import { Screens } from "../screens/types";
+// import FormScreen from "../screens/Form";
+// import Pokedex from "../screens/Pokedex";
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+// const Stack = createNativeStackNavigator<RootStackParamList>();
 
-const NavigationStack = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name={Screens.Home} component={Home} />
-      <Stack.Screen name={Screens.Form} component={FormScreen} />
-    </Stack.Navigator>
-  );
-};
+// const NavigationStack = () => {
+//   return (
+//     <Stack.Navigator>
+//       <Stack.Screen name={Screens.Pokedex} component={Pokedex} />
+//     </Stack.Navigator>
+//   );
+// };
 
-export default NavigationStack;
+// export default NavigationStack;

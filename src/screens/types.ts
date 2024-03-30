@@ -1,6 +1,12 @@
 export enum Screens {
-  Home = "Home",
-  Form = "Form",
+  PokedexNavigator = "PokedexNavigator",
+  Favorites = "Favorites",
+  Account = "Account",
+  Pokedex = "Pokedex",
+  Pokemon = "Pokemon",
 }
 
-export type ScreenValue = keyof typeof Screens;
+export type PrincipalScreenValue =
+  | Screens.PokedexNavigator
+  | Screens.Favorites
+  | Screens.Account;
