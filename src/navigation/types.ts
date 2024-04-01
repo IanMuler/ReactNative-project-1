@@ -1,5 +1,6 @@
 import { ParamListBase, RouteProp } from "@react-navigation/native";
 import { Screens } from "../screens/types";
+import { PokemonSummary } from "../api/types";
 
 export type RootStackParamList = {
   [Screens.PokedexNavigator]: undefined;
@@ -9,7 +10,7 @@ export type RootStackParamList = {
 
 export type PokedexStackParamList = {
   [Screens.Pokedex]: undefined;
-  [Screens.Pokemon]: undefined;
+  [Screens.Pokemon]: { id: PokemonSummary["id"] };
 };
 
 export type Route = RouteProp<ParamListBase, string>;

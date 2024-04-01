@@ -18,3 +18,21 @@ export const POKEMON_TYPE_COLORS = {
   dark: "#705848",
   fairy: "#EE99AC",
 };
+
+export const barStyles = (num: number) => {
+  let bgColorized;
+
+  if (num <= 25) {
+    bgColorized = "#ff3e3e";
+  } else if (num > 25 && num < 50) {
+    bgColorized = "#F08700";
+  } else if (num >= 50 && num < 75) {
+    bgColorized = "#EFCA08";
+  } else if (num >= 75) {
+    bgColorized = "#6EEB83";
+  }
+  return {
+    backgroundColor: bgColorized,
+    width: `${num}%`,
+  };
+};

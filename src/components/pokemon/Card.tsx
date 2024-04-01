@@ -5,19 +5,24 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
 } from "react-native";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { PokemonSummary } from "../../api/types";
-import { POKEMON_TYPE_COLORS } from "../../utils/const";
-
-function goToPokemonDetails() {
-  console.log("Go to Pokemon Details");
-}
+import { Screens } from "../../screens/types";
+import { PokedexStackParamList } from "../../navigation/types";
+import { getColorByPokemonType } from "../../utils/getColorByPokemonType";
 
 const PokemonCard = ({ pokemon }: { pokemon: PokemonSummary }) => {
+  const navigation: NavigationProp<PokedexStackParamList> = useNavigation();
+
+  const backgroundColor = getColorByPokemonType(pokemon.type);
   const bgStyles = {
-    backgroundColor:
-      POKEMON_TYPE_COLORS[pokemon.type as keyof typeof POKEMON_TYPE_COLORS],
+    backgroundColor,
     ...styles.bgStyles,
   };
+
+  function goToPokemonDetails() {
+    navigation.navigate(Screens.Pokemon, { id: pokemon.id });
+  }
 
   return (
     <TouchableWithoutFeedback onPress={goToPokemonDetails}>

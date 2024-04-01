@@ -1,9 +1,6 @@
 import { API_URL } from "@env";
-import {
-  PokemonPaginatedResponse,
-  PokemonFull,
-  PokemonSummary,
-} from "../types";
+import { PokemonPaginatedResponse, PokemonFull } from "../types";
+import { summarizePokemon } from "../../utils/summarizePokemon";
 
 const fetchPokemon = (id: PokemonFull["id"]) => {
   return fetch(`${API_URL}/pokemon/${id}`)
@@ -34,18 +31,6 @@ const getPokemonSummaries = (
   });
 
   const pokemons_full = Promise.all(ids.map((id) => fetchPokemon(id)));
-
-  function summarizePokemon(pokemon_full: PokemonFull): PokemonSummary {
-    return {
-      id: pokemon_full.id,
-      name: pokemon_full.name,
-      type: pokemon_full.types[0].type.name,
-      order: pokemon_full.order,
-      image: pokemon_full.sprites.other
-        ? pokemon_full.sprites.other["official-artwork"].front_default
-        : "",
-    };
-  }
 
   return pokemons_full.then((pokemons_full) => {
     return pokemons_full.map((pokemon_full) => summarizePokemon(pokemon_full));

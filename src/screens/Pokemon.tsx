@@ -1,21 +1,37 @@
-import { View, Text, Button, Image } from "react-native";
+import { Text, Image, Alert } from "react-native";
 import { usePokemon } from "../api/pokemon";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { PokemonSummary } from "../api/types";
+import { NavigationProp } from "@react-navigation/native";
+import { useEffect } from "react";
+import { PokedexStackParamList } from "../navigation/types";
+import Details from "../components/pokemon/details";
 
-const Pokemon = ({ navigation }: any) => {
-  const { data: pokemon } = usePokemon(1);
+interface IPokemonScreenProps {
+  navigation: NavigationProp<PokedexStackParamList>;
+  route: {
+    params: {
+      id: PokemonSummary["id"];
+    };
+  };
+}
+
+const PokemonScreen = ({ navigation, route }: IPokemonScreenProps) => {
+  const { id } = route.params;
+  const { data: pokemon, isLoading, isError } = usePokemon(id);
+
+  useEffect(() => {
+    if (isError) {
+      Alert.alert("Error", "No se pudo cargar el pokemon");
+      navigation.goBack();
+    }
+  }, [isError]);
 
   return (
     <SafeAreaView>
-      <Text>{pokemon?.name}</Text>
-      <Text>{pokemon?.height}</Text>
-      <Text>{pokemon?.weight}</Text>
-      <Image
-        source={{ uri: pokemon?.sprites.front_default }}
-        style={{ width: 100, height: 100 }}
-      />
+      <Details pokemon={pokemon} loading={isLoading} />
     </SafeAreaView>
   );
 };
 
-export default Pokemon;
+export default PokemonScreen;

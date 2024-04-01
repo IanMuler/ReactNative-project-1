@@ -17,14 +17,6 @@ export interface SimplePokemon {
   color?: string;
 }
 
-export interface PokemonSummary {
-  id: number;
-  name: string;
-  type: string;
-  order: number;
-  image: string;
-}
-
 export interface PokemonFull {
   abilities: Ability[];
   base_experience: number;
@@ -44,6 +36,12 @@ export interface PokemonFull {
   stats: Stat[];
   types: Type[];
   weight: number;
+}
+
+export interface PokemonSummary
+  extends Pick<PokemonFull, "id" | "name" | "order"> {
+  type: string;
+  image: string;
 }
 
 export interface Ability {

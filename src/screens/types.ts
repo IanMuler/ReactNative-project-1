@@ -10,3 +10,5 @@ export type PrincipalScreenValue =
   | Screens.PokedexNavigator
   | Screens.Favorites
   | Screens.Account;
+
+export type PokedexScreenValue = Screens.Pokedex | Screens.Pokemon;
