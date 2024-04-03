@@ -7,6 +7,12 @@ import {
   PokemonSummary,
   Storage,
 } from "../types";
+// import { paths as PathsValues } from "../../../generated_types/types";
+
+// // const paths: Record<string, keyof PathsValues> = {
+// //   pokemon_id: "/pokemon/{id}",
+// //   pokemon: "/pokemon",
+// // };
 
 const fetchPokemon = async (id: number): Promise<PokemonFull> => {
   const response = await fetch(
