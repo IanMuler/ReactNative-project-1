@@ -1,0 +1,363 @@
+openapi: 3.0.0
+info:
+ title: Pokémon API
+ version: 1.0.0
+
+paths:
+ /pokemon:
+   get:
+     summary: Obtener lista de Pokémon
+     operationId: getPokemonList
+     parameters:
+       - in: query
+         name: limit
+         schema:
+           type: integer
+           description: Número máximo de Pokémon a devolver
+         description: Número máximo de Pokémon a devolver
+       - in: query
+         name: offset
+         schema:
+           type: integer
+           description: Índice de inicio para la paginación
+         description: Índice de inicio para la paginación
+     responses:
+       '200':
+         description: Lista de Pokémon
+         content:
+           application/json:
+             schema:
+               $ref: '#/components/schemas/PokemonPaginatedResponse'
+
+ /pokemon/{id}:
+   get:
+     summary: Obtener un Pokémon por ID
+     operationId: getPokemonById
+     parameters:
+       - in: path
+         name: id
+         required: true
+         schema:
+           type: integer
+     responses:
+       '200':
+         description: Pokémon encontrado
+         content:
+           application/json:
+             schema:
+               $ref: '#/components/schemas/PokemonFull'
+       '404':
+         description: Pokémon no encontrado
+
+components:
+ schemas:
+   PokemonPaginatedResponse:
+     type: object
+     properties:
+       count:
+         type: integer
+       next:
+         type: string
+         nullable: true
+       previous:
+         nullable: true
+       results:
+         type: array
+         items:
+           $ref: '#/components/schemas/Result'
+
+   Result:
+     type: object 
+     properties:
+       name:
+         type: string
+       url:
+         type: string
+
+   PokemonFull:
+     type: object
+     properties:
+       abilities:
+         type: array
+         items:
+           $ref: '#/components/schemas/Ability'
+       base_experience:
+         type: integer
+       forms:
+         type: array
+         items:
+           $ref: '#/components/schemas/Species'
+       game_indices:
+         type: array
+         items:
+           $ref: '#/components/schemas/GameIndex'
+       height:
+         type: integer
+       held_items:
+         type: array
+       id:
+         type: integer
+       is_default:
+         type: boolean
+       location_area_encounters:
+         type: string
+       moves:
+         type: array
+         items:
+           $ref: '#/components/schemas/Move'
+       name:
+         type: string
+       order:
+         type: integer  
+       past_types:
+         type: array
+       species:
+         $ref: '#/components/schemas/Species'
+       sprites:
+         $ref: '#/components/schemas/Sprites'
+       stats:
+         type: array
+         items:
+           $ref: '#/components/schemas/Stat'
+       types:
+         type: array
+         items:
+           $ref: '#/components/schemas/Type'
+       weight:
+         type: integer
+
+   Ability:
+     type: object
+     properties:
+       ability:
+         $ref: '#/components/schemas/Species'
+       is_hidden:
+         type: boolean
+       slot:
+         type: integer
+
+   Species:
+     type: object
+     properties:
+       name:
+         type: string
+       url:
+         type: string
+
+   GameIndex:
+     type: object
+     properties:
+       game_index:
+         type: integer
+       version:
+         $ref: '#/components/schemas/Species'
+         
+   Move:
+     type: object
+     properties:
+       move:
+         $ref: '#/components/schemas/Species'
+       version_group_details:
+         type: array
+         items:
+           $ref: '#/components/schemas/VersionGroupDetail'
+           
+   VersionGroupDetail:
+     type: object
+     properties:
+       level_learned_at:
+         type: integer
+       move_learn_method:
+         $ref: '#/components/schemas/Species'
+       version_group:
+         $ref: '#/components/schemas/Species'
+         
+   Sprites:
+     type: object
+     properties:
+       back_default:
+         type: string
+       back_female:
+         nullable: true
+       back_shiny:
+         type: string
+       back_shiny_female:
+         nullable: true
+       front_default:
+         type: string
+       front_female:
+         nullable: true  
+       front_shiny:
+         type: string
+       front_shiny_female:
+         nullable: true
+       other:
+         $ref: '#/components/schemas/Other'
+       versions:
+         $ref: '#/components/schemas/Versions'
+       animated:
+         $ref: '#/components/schemas/Sprites'
+         
+   Other:
+     type: object
+     properties:
+       dream_world:
+         $ref: '#/components/schemas/DreamWorld'
+       official-artwork:
+         $ref: '#/components/schemas/OfficialArtwork'
+         
+   DreamWorld:
+     type: object
+     properties:
+       front_default:
+         type: string
+       front_female:
+         nullable: true
+         
+   OfficialArtwork:
+     type: object
+     properties:
+       front_default:
+         type: string
+         
+   Versions:
+     type: object
+     properties:
+       generation-i:
+         $ref: '#/components/schemas/GenerationI'
+       generation-ii:
+         $ref: '#/components/schemas/GenerationIi'
+       generation-iii:
+         $ref: '#/components/schemas/GenerationIii'
+       generation-iv:
+         $ref: '#/components/schemas/GenerationIv'
+       generation-v:
+         $ref: '#/components/schemas/GenerationV'
+       generation-vi:
+         type: object
+         additionalProperties:
+           $ref: '#/components/schemas/GenerationVi'
+       generation-vii:
+         $ref: '#/components/schemas/GenerationVii'
+       generation-viii:
+         $ref: '#/components/schemas/GenerationViii'
+         
+   GenerationI:
+     type: object 
+     properties:
+       red-blue:
+         $ref: '#/components/schemas/RedBlue'
+       yellow:
+         $ref: '#/components/schemas/RedBlue'
+         
+   RedBlue:
+     type: object
+     properties:
+       back_default:
+         type: string
+       back_gray:
+         type: string
+       front_default:
+         type: string
+       front_gray:
+         type: string
+         
+   GenerationIi:
+     type: object
+     properties:
+       crystal:
+         $ref: '#/components/schemas/Crystal'
+       gold:
+         $ref: '#/components/schemas/Crystal'
+       silver:
+         $ref: '#/components/schemas/Crystal'
+         
+   Crystal:
+     type: object
+     properties:
+       back_default:
+         type: string
+       back_shiny:
+         type: string
+       front_default:
+         type: string
+       front_shiny:
+         type: string
+         
+   GenerationIii:
+     type: object
+     properties:
+       emerald:
+         $ref: '#/components/schemas/Emerald'
+       firered-leafgreen:
+         $ref: '#/components/schemas/Crystal'
+       ruby-sapphire:
+         $ref: '#/components/schemas/Crystal'
+         
+   Emerald:
+     type: object
+     properties:
+       front_default:
+         type: string
+       front_shiny:
+         type: string
+         
+   GenerationVi:
+     type: object
+     properties:
+       front_default:
+         type: string
+       front_female:
+         nullable: true
+       front_shiny:
+         type: string  
+       front_shiny_female:
+         nullable: true
+         
+   GenerationVii:
+     type: object
+     properties:
+       icons:
+         $ref: '#/components/schemas/DreamWorld'
+       ultra-sun-ultra-moon:
+         $ref: '#/components/schemas/GenerationVi'
+
+   GenerationViii:
+     type: object
+     properties:
+       icons:
+         $ref: '#/components/schemas/DreamWorld'
+
+   GenerationIv:
+     type: object
+     properties:
+       diamond-pearl:
+         $ref: '#/components/schemas/Sprites'
+       heartgold-soulsilver:
+         $ref: '#/components/schemas/Sprites'  
+       platinum:
+         $ref: '#/components/schemas/Sprites'
+
+   GenerationV:
+     type: object 
+     properties:
+       black-white:
+         $ref: '#/components/schemas/Sprites'
+         
+   Stat:
+     type: object
+     properties:
+       base_stat:
+         type: integer
+       effort:
+         type: integer
+       stat:
+         $ref: '#/components/schemas/Species'
+
+   Type:
+     type: object
+     properties:
+       slot:
+         type: integer
+       type:
+         $ref: '#/components/schemas/Species'

@@ -4,12 +4,17 @@ import { PokemonSummary } from "../api/types";
 
 export type RootStackParamList = {
   [Screens.PokedexNavigator]: undefined;
-  [Screens.Favorites]: undefined;
+  [Screens.FavoritesNavigator]: undefined;
   [Screens.Account]: undefined;
 };
 
 export type PokedexStackParamList = {
   [Screens.Pokedex]: undefined;
+  [Screens.Pokemon]: { id: PokemonSummary["id"] };
+};
+
+export type FavoritesStackParamList = {
+  [Screens.Favorites]: undefined;
   [Screens.Pokemon]: { id: PokemonSummary["id"] };
 };
 

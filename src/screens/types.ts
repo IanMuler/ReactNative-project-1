@@ -1,5 +1,6 @@
 export enum Screens {
   PokedexNavigator = "PokedexNavigator",
+  FavoritesNavigator = "FavoritesNavigator",
   Favorites = "Favorites",
   Account = "Account",
   Pokedex = "Pokedex",
@@ -8,7 +9,5 @@ export enum Screens {
 
 export type PrincipalScreenValue =
   | Screens.PokedexNavigator
-  | Screens.Favorites
+  | Screens.FavoritesNavigator
   | Screens.Account;
-
-export type PokedexScreenValue = Screens.Pokedex | Screens.Pokemon;

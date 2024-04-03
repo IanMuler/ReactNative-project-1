@@ -10,9 +10,9 @@ import PokemonCard from "./Card";
 
 interface IPokemonListProps {
   pokemonList: PokemonSummary[];
-  maxReached: boolean;
+  maxReached?: boolean;
   loading: boolean;
-  onEndReached: () => void;
+  onEndReached?: () => void;
 }
 
 const PokemonList = ({
@@ -22,7 +22,7 @@ const PokemonList = ({
   onEndReached,
 }: IPokemonListProps) => {
   const load_pokemon_allowed =
-    !loading && pokemonList.length > 0 && !maxReached;
+    pokemonList.length > 0 && !maxReached && onEndReached;
 
   if (loading && pokemonList.length === 0) {
     return <Text>Cargando...</Text>;

@@ -1,4 +1,6 @@
 {
-  "compilerOptions": {},
+  "compilerOptions": {
+    "types": ["node"] // Asegúrate de incluir "node" aquí
+  },
   "extends": "@tsconfig/react-native/tsconfig.json",
 }

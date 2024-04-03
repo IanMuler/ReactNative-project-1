@@ -5,10 +5,10 @@ import {
 import { PrincipalScreenValue, Screens } from "../screens/types";
 import { AntDesign } from "@expo/vector-icons";
 import { RootStackParamList, Route } from "./types";
-import FavoritesScreen from "../screens/Favorites";
 import AccountScreen from "../screens/Account";
 import { Image } from "react-native";
 import PokedexNavigation from "./PokedexNavigator";
+import FavoritesNavigator from "./FavoritesNagivator";
 
 const Tab = createBottomTabNavigator<RootStackParamList>();
 
@@ -25,14 +25,14 @@ const IconMap: Record<
   keyof typeof AntDesign.glyphMap | JSX.Element
 > = {
   [Screens.PokedexNavigator]: PokedexIcon,
-  [Screens.Favorites]: "heart",
+  [Screens.FavoritesNavigator]: "heart",
   [Screens.Account]: "user",
 };
 
 // Labels
 const LabelMap: Record<PrincipalScreenValue, string> = {
   [Screens.PokedexNavigator]: "",
-  [Screens.Favorites]: "Favoritos",
+  [Screens.FavoritesNavigator]: "Favoritos",
   [Screens.Account]: "Cuenta",
 };
 
@@ -83,7 +83,10 @@ const NavigationTab = () => {
       screenOptions={({ route }) => getScreenOptions(route)}
       initialRouteName={Screens.PokedexNavigator}
     >
-      <Tab.Screen name={Screens.Favorites} component={FavoritesScreen} />
+      <Tab.Screen
+        name={Screens.FavoritesNavigator}
+        component={FavoritesNavigator}
+      />
       <Tab.Screen
         name={Screens.PokedexNavigator}
         component={PokedexNavigation}
